@@ -1,0 +1,14 @@
+server:
+  port: 8103
+#security:
+#  oauth2:
+#    client:
+#      clientId: barClientIdPassword
+#      clientSecret: secret
+#      accessTokenUri: http://127.0.0.1:8102/oauth/token #获取指定code对应的access token的URI
+#      userAuthorizationUri: http://127.0.0.1:8102/oauth/authorize #用户跳转去获取access token的code的URI
+#      #clientAuthenticationScheme: form
+#    resource:
+#      userInfoUri: http://127.0.0.1:8102/user
+#      #tokenInfoUri: http://127.0.0.1:8102/oauth/check_token #检查令牌
+#      filter-order: 3

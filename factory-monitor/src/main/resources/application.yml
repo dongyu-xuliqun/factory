@@ -1,0 +1,31 @@
+#hystrix-dashboard熔断器的可视化界面
+server:
+  port: 8900
+  
+spring:
+  application:
+    name: monitor
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    appname: monitor
+    
+turbine:
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
+  appConfig: consumer-feign,consumer,service
+  #appConfig: consumer,consumer-fegin,config,eureka-service,service,zuul
+  #combine-host-port: true
+  #instanceUrlSuffix:
+  #default: actuator/hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

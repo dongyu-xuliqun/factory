@@ -1,0 +1,25 @@
+#zipkin:
+#  base-url: http://localhost:9411
+#sleuth:
+#  sampler:
+#    percentage: 1.0
+
+server:
+  port: 8300
+
+logging:
+  level:
+    com.yasaka.stock.feign.MFeignClient: debug
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  ReadTimeout:  30000
+  ConnectTimeout:  15000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 100000

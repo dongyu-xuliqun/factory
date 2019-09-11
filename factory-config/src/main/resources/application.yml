@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/dev, classpath:/config/prod
+#  security:
+#    basic:
+#      enabled: true
+#    user:
+#      name: root
+#      password: booszy
+  application:
+    name: config-server
+  profiles:
+    active: native #这个不要随意改
+server:
+  port: 8888

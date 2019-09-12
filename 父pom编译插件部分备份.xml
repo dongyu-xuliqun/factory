@@ -1,0 +1,388 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.cdf.factory</groupId>
+	<artifactId>factory</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>factory</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.8.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+		<!-- <hbase-client.version>2.1.2</hbase-client.version> -->
+
+		<maven_compiler_plugin_version>2.3.2</maven_compiler_plugin_version>
+		<java_source_version>1.8</java_source_version>
+		<java_target_version>1.8</java_target_version>
+		<file_encoding>UTF-8</file_encoding>
+		<fastjson.version>1.2.59</fastjson.version>
+		<commons-lang3.version>3.9</commons-lang3.version>
+		<commons-codec.version>1.13</commons-codec.version>
+		<bcprov-jdk15on.version>1.62</bcprov-jdk15on.version>
+
+
+		<maven_source_plugin_version>2.1.1</maven_source_plugin_version>
+		<maven_jar_plugin_version>2.5</maven_jar_plugin_version>
+		<maven_war_plugin_version>2.5</maven_war_plugin_version>
+		<maven_install_plugin_version>2.5.2</maven_install_plugin_version>
+		<maven_deploy_plugin_version>2.8.2</maven_deploy_plugin_version>
+
+		<maven-surefire-plugin_version>2.17</maven-surefire-plugin_version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>			
+			<!-- <dependency>
+				<groupId>org.apache.hbase</groupId>
+				<artifactId>hbase-client</artifactId>
+				<version>${hbase-client.version}</version>
+			</dependency> -->
+			<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-log4j2</artifactId> 
+				<version>${spring.boot.version}</version> </dependency> -->
+			<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-test</artifactId> 
+				<scope>test</scope> <version>${spring.boot.version}</version> </dependency> -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-jwt</artifactId>
+				<version>1.0.10.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+				<version>2.3.5.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-config</artifactId>
+				<version>1.1.6.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-core</artifactId>
+				<version>1.1.6.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-security</artifactId>
+				<version>1.1.6.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-web</artifactId>
+				<version>1.1.6.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<!-- <dependency> <groupId>commons-lang3</groupId> <artifactId>commons-lang</artifactId> 
+				<version>${commons-lang3.version}</version> </dependency> <dependency> <groupId>commons-logging</groupId> 
+				<artifactId>commons-logging</artifactId> <version>${commons-logging.version}</version> 
+				</dependency> -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+			<!-- <dependency> <groupId>jdk.tools</groupId> <artifactId>jdk.tools</artifactId> 
+				<version>1.8</version> <scope>system</scope> <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath> 
+				</dependency> -->
+			<dependency>
+			    <groupId>commons-codec</groupId>
+			    <artifactId>commons-codec</artifactId>
+			    <version>${commons-codec.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
+			<dependency>
+			    <groupId>org.bouncycastle</groupId>
+			    <artifactId>bcprov-jdk15on</artifactId>
+			    <version>${bcprov-jdk15on.version}</version>
+			</dependency>			
+	        <!-- <dependency>
+				<groupId>org.springframework.amqp</groupId>
+			  <artifactId>spring-rabbit</artifactId>
+			  <version>2.1.10.RELEASE</version>
+			</dependency>	 -->	
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-devtools</artifactId>
+				<version>1.3.0.BUILD-SNAPSHOT</version>
+				<optional>true</optional>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+	</dependencies>	
+	<!-- <repositories>  
+        <repository>  
+            <id>spring-milestone</id>  
+            <url>http://repo.spring.io/libs-release</url>  
+        </repository>  
+    </repositories>  -->
+	<build>
+		<plugins>
+			<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                	<!-- 有JAR，WAR,ZIP -->
+                    <layout>JAR</layout>  
+                    <executable>true</executable>                  
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>classes</classifier>
+                            <attach>false</attach>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>	
+            <!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>			
+				<artifactId>maven-war-plugin</artifactId>			
+				<configuration>			
+					<archiveClasses>true</archiveClasses>			
+					<failOnMissingWebXml>false</failOnMissingWebXml>			
+					<webResources>			
+						<resource>			
+							<directory>src/main/resources/${package.environment}</directory>			
+							<filtering>true</filtering>			
+							<targetPath>WEB-INF/classes</targetPath>			
+						</resource>			
+					</webResources>			
+				</configuration>			
+			</plugin>	 -->			
+			<!-- 打jar包的插件，把整个maven工程打成jar包 -->
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						生成的jar中，包含pom.xml和pom.properties这两个文件
+						<addMavenDescriptor>true</addMavenDescriptor>
+						<index>true</index>
+						生成MANIFEST.MF的设置
+						<manifest>
+							这个属性特别关键，如果没有这个属性，有时候我们引用的包maven库
+						                下面可能会有多个包，并且只有一个是正确的，其余的可能是带时间戳的，
+						                此时会在classpath下面把那个带时间戳的给添加上去，然后我们
+						                在依赖打包的时候，打的是正确的，所以两头会对不上，报错。
+						    <useUniqueVersions>false</useUniqueVersions>
+							为依赖包添加路径, 这些路径会写在MANIFEST文件的Class-Path下
+							<addClasspath>true</addClasspath>
+							这个jar所依赖的jar包添加classPath的时候的前缀，如果这个jar本身和依赖包在同一级目录，则不需要添加
+			                <classpathPrefix>lib/</classpathPrefix>
+			                jar启动入口类
+			                <mainClass>com.test.Test</mainClass>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+			                在Class-Path下添加配置文件的路径
+			                <Class-Path>../config/</Class-Path>
+			                假如这个项目可能要引入一些外部资源，但是你打包的时候并不想把
+						                这些资源文件打进包里面，这个时候你必须在这边额外指定一些这些资源
+						                文件的路径，这个位置指定的话，要根据你预期的这些位置去设置，我这边
+						                所有jar都在lib下，资源文件都在config下，lib和config是同级的
+						                同时还需要注意另外一个问题，假如你的pom文件里面配置了
+						                <scope>system</scope>,就是你依赖是你本地的资源，这个时候使用
+						                这个插件，classPath里面是不会添加，所以你得手动把这个依赖添加进
+						                这个地方，用空格隔开就行
+			            </manifestEntries>
+						jar包的位置
+				        <outputDirectory>${project.build.directory}/lib</outputDirectory>
+				        <includes>
+				            打jar包时，只打包class文件
+				            有时候可能需要一些其他文件，这边可以配置，包括剔除的文件等等
+				            <include>**/*.class</include>
+				        </includes>
+					</archive>
+				</configuration>
+			</plugin> -->
+			<!-- 用来拷贝项目所有依赖的插件 -->
+			<!-- <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-dependency-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <id>copy-dependencies</id>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>copy-dependencies</goal>
+			            </goals>
+			            <configuration>
+			                拷贝项目依赖包到lib/目录下
+			                <outputDirectory>${project.build.directory}/lib</outputDirectory>
+			                间接依赖也拷贝
+			                <excludeTransitive>false</excludeTransitive>
+			                带上版本号
+			                <stripVersion>false</stripVersion>
+			                <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin> -->
+			<!-- 打包源代码 -->
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					一个execution就是一个目标输入位置，如果想把各种资源拆开放的话，就
+       				 可以创建多个execution，一个资源文件可以被拷贝多份
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+						<configuration>
+			                <encoding>UTF-8</encoding>
+			                资源文件的输出目录
+			                <outputDirectory>{project.build.directory}/config</outputDirectory>
+			                <resources>
+			                    资源文件的原始目录，有多个的话就多配几个
+			                    <resource>
+			                        原始目录
+			                        <directory>src/main/resources</directory>
+			                        是否使用过滤器，如果是的话，需要配置一下才行
+			                        这个后续再研究，这边没有使用到
+			                        <filtering>true</filtering>
+			                        包含哪些文件以及去除调哪些文件等等
+			                        <includes>
+			                            <include>**/*.*</include>
+			                        </includes>
+			                        <excludes>
+			                            <exclude>**/*.json</exclude>
+			                        </excludes>
+			                    </resource>
+			                </resources>
+			            </configuration>
+					</execution>
+				</executions>
+			</plugin> -->
+			<!-- 打包时执行单元测试配置 -->
+			<!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin> -->
+			<!--将项目安装到本地maven库中-->
+			<!-- <plugin> 
+				<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-install-plugin</artifactId>             
+				<executions>
+				    <execution>
+				        <id>maven</id>
+				        <goals>
+				            <goal>install-file</goal>
+				        </goals>
+				        <phase>install</phase>
+				        <configuration>
+				            <groupId>com.jm.samples</groupId>
+				            <artifactId>samples</artifactId>
+				            <version>${project.version}</version>
+				            <classifier>linux</classifier>
+				            <packaging>jar</packaging>
+				            <file>${project.build.directory}/${project.build.finalName}-linux.jar</file>
+				        </configuration>
+				    </execution>
+				</executions>
+        	</plugin> -->
+		</plugins>
+
+		<!-- <pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven_jar_plugin_version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven_war_plugin_version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven_install_plugin_version}</version>
+				</plugin>				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven_compiler_plugin_version}</version>
+					<configuration>
+						<source>${java_source_version}</source>
+						<target>${java_target_version}</target>
+						<encoding>${file_encoding}</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement> -->
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<modules>
+		<module>factory-common</module>
+		<module>factory-config</module>
+		<module>factory-eureka-server</module>
+		<module>factory-monitor</module>
+		<module>factory-service</module>
+		<module>factory-admin</module>
+		<module>factory-consumer</module>
+		<module>factory-consumer-feign</module>
+		<module>factory-seluthzipkin</module>
+		<module>factory-zuul</module>
+		<module>factory-oauth-jwt-resource-server</module>
+		<module>factory-oauth-jwt-auth-server</module>
+		<module>factory-oauth-client</module>
+		<module>factory-web</module>
+		<module>factory-mail</module>
+		<module>factory-cache</module>
+		<module>factory-dao</module>
+		<module>factory-job</module>
+	</modules>
+</project>

@@ -35,13 +35,13 @@
 		<bcprov-jdk15on.version>1.62</bcprov-jdk15on.version>
 
 
-		<maven_source_plugin_version>2.1.1</maven_source_plugin_version>
+		<!-- <maven_source_plugin_version>2.1.1</maven_source_plugin_version>
 		<maven_jar_plugin_version>2.5</maven_jar_plugin_version>
 		<maven_war_plugin_version>2.5</maven_war_plugin_version>
 		<maven_install_plugin_version>2.5.2</maven_install_plugin_version>
 		<maven_deploy_plugin_version>2.8.2</maven_deploy_plugin_version>
 
-		<maven-surefire-plugin_version>2.17</maven-surefire-plugin_version>
+		<maven-surefire-plugin_version>2.17</maven-surefire-plugin_version> -->
 	</properties>
 
 	<dependencyManagement>
@@ -136,21 +136,31 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<archive>
-						<addMavenDescriptor>true</addMavenDescriptor>
-						<index>true</index>
-						<manifest>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-						</manifest>
-					</archive>
-				</configuration>
+					<!-- 跳过三方依赖 -->
+					<skip>true</skip>
+                	<!-- 有JAR，WAR,ZIP -->
+                    <layout>JAR</layout>  
+                   <!--  <executable>true</executable>   -->                  
+                </configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
-			<plugin>
+			<!-- 打包资源文件source。jar包 -->			
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					设置字符编码集
+					<encoding>UTF-8</encoding>
+				</configuration>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -158,57 +168,58 @@
 						<goals>
 							<goal>jar-no-fork</goal>
 						</goals>
+					</execution>					
+				</executions>
+			</plugin> -->
+			<!-- 打包时执行单元测试配置 -->
+			<!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin> -->
+            <!-- 打包bin。zip文件 -->
+            <!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>./assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
 					</execution>
 				</executions>
-			</plugin>
-		</plugins>
-
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${maven_jar_plugin_version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>${maven_war_plugin_version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>${maven_install_plugin_version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>${maven_deploy_plugin_version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven_compiler_plugin_version}</version>
-					<configuration>
-						<source>${java_source_version}</source>
-						<target>${java_target_version}</target>
-						<encoding>${file_encoding}</encoding>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+			</plugin> -->
+			<!-- 把项目依赖的第三方包打包在target/lib下 -->
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<excludeTransitive>false</excludeTransitive>
+							<stripVersion>false</stripVersion>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> -->
+		</plugins>		
 	</build>
-
-	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/libs-snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<modules>
 		<module>factory-common</module>
 		<module>factory-config</module>

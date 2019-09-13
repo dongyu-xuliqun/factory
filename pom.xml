@@ -33,15 +33,6 @@
 		<commons-lang3.version>3.9</commons-lang3.version>
 		<commons-codec.version>1.13</commons-codec.version>
 		<bcprov-jdk15on.version>1.62</bcprov-jdk15on.version>
-
-
-		<!-- <maven_source_plugin_version>2.1.1</maven_source_plugin_version>
-		<maven_jar_plugin_version>2.5</maven_jar_plugin_version>
-		<maven_war_plugin_version>2.5</maven_war_plugin_version>
-		<maven_install_plugin_version>2.5.2</maven_install_plugin_version>
-		<maven_deploy_plugin_version>2.8.2</maven_deploy_plugin_version>
-
-		<maven-surefire-plugin_version>2.17</maven-surefire-plugin_version> -->
 	</properties>
 
 	<dependencyManagement>
@@ -157,11 +148,11 @@
 				</executions>
 			</plugin>
 			<!-- 打包资源文件source。jar包 -->			
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<configuration>
-					<!-- 设置字符编码集 -->
+					设置字符编码集
 					<encoding>UTF-8</encoding>
 				</configuration>
 				<executions>
@@ -173,17 +164,17 @@
 						</goals>
 					</execution>					
 				</executions>
-			</plugin>
+			</plugin> -->
 			<!-- 打包时执行单元测试配置 -->
-			<plugin>
+			<!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
-            </plugin>
+            </plugin> -->
             <!-- 打包bin。zip文件 -->
-            <plugin>
+            <!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
@@ -200,9 +191,9 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<!-- 把项目依赖的第三方包打包在target/lib下 -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
@@ -220,7 +211,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 		</plugins>		
 	</build>
 	<modules>

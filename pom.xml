@@ -140,10 +140,13 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<!-- 跳过三方依赖 -->
+					<!-- 如需将代码重新打包成springboot的可执行jar包，则注释掉该skip参数，打开则跳过生成springboot可执行包，即生成普通的jar包 -->
+					<!-- 公共模块的该参数设置为true,不生成可执行jar包，如factory-common模块 -->
+					<!-- 该参数打开后，spring-boot-maven-plugin不执行repackage -->
 					<skip>true</skip>
                 	<!-- 有JAR，WAR,ZIP -->
                     <layout>JAR</layout>  
-                   <!--  <executable>true</executable>   -->                  
+                   	<executable>true</executable>           
                 </configuration>
 				<executions>
 					<execution>
@@ -154,11 +157,11 @@
 				</executions>
 			</plugin>
 			<!-- 打包资源文件source。jar包 -->			
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<configuration>
-					设置字符编码集
+					<!-- 设置字符编码集 -->
 					<encoding>UTF-8</encoding>
 				</configuration>
 				<executions>
@@ -170,17 +173,17 @@
 						</goals>
 					</execution>					
 				</executions>
-			</plugin> -->
+			</plugin>
 			<!-- 打包时执行单元测试配置 -->
-			<!-- <plugin>
+			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
-            </plugin> -->
+            </plugin>
             <!-- 打包bin。zip文件 -->
-            <!-- <plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
@@ -197,9 +200,9 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> -->
+			</plugin>
 			<!-- 把项目依赖的第三方包打包在target/lib下 -->
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
@@ -217,7 +220,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin> -->
+			</plugin>
 		</plugins>		
 	</build>
 	<modules>

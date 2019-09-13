@@ -16,10 +16,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<!-- <properties>
-		<spring-boot-admin.version>2.1.8</spring-boot-admin.version>
-	</properties>
- -->
+	<!-- <properties> <spring-boot-admin.version>2.1.8</spring-boot-admin.version> 
+		</properties> -->
 	<dependencies>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -34,17 +32,17 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-		</dependency>
-        <dependency>
 			<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-amqp</artifactId>
-		</dependency>	
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
 		<!-- <dependency> <groupId>de.codecentric</groupId> <artifactId>spring-boot-admin-starter-server</artifactId> 
 			</dependency> <dependency> <groupId>de.codecentric</groupId> <artifactId>spring-boot-admin-server-ui</artifactId> 
 			</dependency> -->
@@ -62,8 +60,22 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>		   
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
 		</dependency>
-	</dependencies>	
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- 跳过三方依赖 -->
+					<skip>true</skip>
+					<!-- 有JAR，WAR,ZIP -->
+					<layout>NONE</layout>					
+				</configuration>				
+			</plugin>
+		</plugins>
+	</build>
 </project>

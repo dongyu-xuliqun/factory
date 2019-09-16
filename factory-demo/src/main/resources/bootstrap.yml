@@ -1,0 +1,44 @@
+server:
+  port: 8500
+
+spring:
+  application:
+    name: demo-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-service
+      fail-fast: true
+#       username: root
+#       password: booszy
+      name: db-mysql,redis,db-mongodb,config-rabbitmq
+      profile: ${spring.profiles.active}
+#  zipkin:
+#    base-url: http://localhost:9411
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+  profiles:
+    active: dev
+#  redis:
+#    host: 172.0.0.1
+#    password: 123456
+#    port: 6379
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#  datasource:
+#    druid:
+#      url: jdbc:mysql://127.0.0.1:3306/test
+#      username: root
+#      password: booszy 
+logging:
+  level:
+    root: info
+    org.hibernate : info
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.yasaka.stock : debug

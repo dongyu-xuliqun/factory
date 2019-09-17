@@ -2,11 +2,12 @@ eureka:
   instance:
     prefer-ip-address: true    
     #non-secure-port: ${server.port:8888}
-    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
+    #instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
+    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${random.int}:@project.version@
     appname: ${spring.application.name}   
   client:
     service-url:
-      defaultZone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
+      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
 
 spring:
   application:
@@ -26,9 +27,7 @@ spring:
 #      name: root
 #      password: booszy  
   profiles:
-    active: native #native/remote   #native表示本地方式 #这个不要随意改   
-server:
-  port: 8888 
+    active: native #native/remote   #native表示本地方式 #这个不要随意改  
 
 # 允许/actuator/bus-refresh接口被外部调用
 management:  

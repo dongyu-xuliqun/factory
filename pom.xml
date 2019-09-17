@@ -43,7 +43,14 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>			
+			</dependency>
+            <!-- <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>Athens-SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency> -->
 			<!-- <dependency>
 				<groupId>org.apache.hbase</groupId>
 				<artifactId>hbase-client</artifactId>
@@ -68,7 +75,7 @@
 				<artifactId>spring-social-config</artifactId>
 				<version>1.1.6.RELEASE</version>
 			</dependency>
-			<!-- <dependency>
+			<dependency>
 				<groupId>org.springframework.social</groupId>
 				<artifactId>spring-social-core</artifactId>
 				<version>1.1.6.RELEASE</version>
@@ -82,7 +89,7 @@
 				<groupId>org.springframework.social</groupId>
 				<artifactId>spring-social-web</artifactId>
 				<version>1.1.6.RELEASE</version>
-			</dependency> -->
+			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
@@ -117,11 +124,12 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-commons</artifactId>
-        </dependency>
+        </dependency> -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -233,5 +241,6 @@
 		<module>factory-dao</module>
 		<module>factory-job</module>
 		<module>factory-demo</module>
+		<module>factory-gateway</module>
 	</modules>
 </project>

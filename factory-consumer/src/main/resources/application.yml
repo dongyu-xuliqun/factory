@@ -1,5 +1,13 @@
-server:
-  port: 8200
+eureka:
+  instance:
+    prefer-ip-address: true    
+    #non-secure-port: ${server.port:8888}
+    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${random.int}:@project.version@
+    appname: ${spring.application.name}   
+  client:
+    service-url:
+      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
+
 logging:
   level:
     com.yasaka.stock.feign.MFeignClient: debug
@@ -32,14 +40,3 @@ merryyou:
       maxSessionsPreventsLogin: false
 #      sessionInvalidUrl : /merryyou-session-invalid.html
     loginType: JSON
-
-    
-spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/test_oauth?&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: create

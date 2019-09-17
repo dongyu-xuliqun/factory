@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableCircuitBreaker
 @EnableFeignClients
 @EnableHystrix
 public class FactoryConsumerApplication {

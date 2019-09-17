@@ -1,11 +1,11 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${server.port}
-    appname: service
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.application.name}:${server.port}
+#    appname: service
 
 spring:
   application:
@@ -18,7 +18,7 @@ spring:
       fail-fast: true
 #       username: root
 #       password: booszy
-      profile: dev
+#      profile: dev
 #  zipkin:
 #    base-url: http://localhost:9411
 #  sleuth:

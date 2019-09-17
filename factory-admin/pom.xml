@@ -17,10 +17,6 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<properties>
-		<spring-boot-admin.version>2.0.3</spring-boot-admin.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>de.codecentric</groupId>
@@ -51,16 +47,5 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-dependencies</artifactId>
-				<version>${spring-boot-admin.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>	
+	</dependencies>		
 </project>

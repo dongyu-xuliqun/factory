@@ -11,7 +11,7 @@
 #内存信息
 #Spring 环境属性
 server:
-  port: 5000
+  port: 0
 spring:
   application:
     name: admin-service
@@ -23,13 +23,18 @@ eureka:
   client:
     registryFetchIntervalSeconds: 5
     service-url:
-      defaultZone: ${EUREKA_SERVICE_URL:http://server1:8761}/eureka/
+      #default-zone: ${EUREKA_SERVICE_URL:http://server1:8761}/eureka/
+      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
   instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${random.int}:@project.version@
+    appname: ${spring.application.name}
+    prefer-ip-address: true
     leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
     metadata-map:
       user.name: ${spring.security.user.name}
       user.password: ${spring.security.user.password}
+
 
 management:
   endpoints:

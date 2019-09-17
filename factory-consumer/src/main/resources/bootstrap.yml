@@ -1,27 +1,33 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${server.port}
-    appname: consumer
+server:
+  port: 0
+
 
 #之所以要用bootstrap.yml，是因为启动SpringBoot项目时，会优先读取bootstrap.yml里的配置，然后才会读取application.yml.如果不通过bootstrap.yml里的配置，先从配置中心拉下相应的配置文件，就会报错
 spring:
   application:
-    name: consumer-server
+    name: consumer-service
   cloud:
     config:
       discovery:
         enabled: true
-        service-id: config-server
+        service-id: config-service
       fail-fast: true
-#      username: root
-#      password: booszy
-      profile: ${spring.profiles.active} #注意区别于config下的pring cloud profiles，两者是不同的
-      name: common,db-mysql,redis,rabbitmq   
-  profiles:    active: dev    
+#       username: root
+#       password: booszy
+      name: db-mysql,rabbitmq,zipkin
+      profile: ${spring.profiles.active}
+#  zipkin:
+#    base-url: http://localhost:9411/
+#    sender:
+#      type: WEB
+#  sleuth:
+#    web:
+#      client:
+#        enabled: true
+#    sampler:
+#      probability: 1.0
+  profiles:
+    active: dev 
 #  zipkin:
 #    base-url: http://localhost:9411
 #  sleuth:

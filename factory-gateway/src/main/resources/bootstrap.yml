@@ -1,0 +1,33 @@
+server:
+  port: 10010
+
+#之所以要用bootstrap.yml，是因为启动SpringBoot项目时，会优先读取bootstrap.yml里的配置，然后才会读取application.yml.如果不通过bootstrap.yml里的配置，先从配置中心拉下相应的配置文件，就会报错
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-service
+      fail-fast: true
+#       username: root
+#       password: booszy
+      name: db-mysql,db-mongodb,config-rabbitmq,routes,redis,zipkin
+      profile: ${spring.profiles.active} 
+  profiles:
+    active: dev 
+#  zipkin:
+#    base-url: http://localhost:9411
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+#  profiles:
+#    active: dev
+
+#新版配置，否则后面dashboard无法找到hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

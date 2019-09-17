@@ -23,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+		<spring-boot-admin.version>2.0.3</spring-boot-admin.version>
 		<!-- <hbase-client.version>2.1.2</hbase-client.version> -->
 
 		<maven_compiler_plugin_version>2.3.2</maven_compiler_plugin_version>
@@ -31,6 +32,8 @@
 		<file_encoding>UTF-8</file_encoding>
 		<fastjson.version>1.2.59</fastjson.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
+		<commons-pool2.version>2.6.2</commons-pool2.version>		
+		<commons-collections4.version>4.3</commons-collections4.version>
 		<commons-codec.version>1.13</commons-codec.version>
 		<bcprov-jdk15on.version>1.62</bcprov-jdk15on.version>
 	</properties>
@@ -43,7 +46,14 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>			
+			</dependency>
+            <!-- <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>Athens-SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency> -->
 			<!-- <dependency>
 				<groupId>org.apache.hbase</groupId>
 				<artifactId>hbase-client</artifactId>
@@ -68,7 +78,7 @@
 				<artifactId>spring-social-config</artifactId>
 				<version>1.1.6.RELEASE</version>
 			</dependency>
-			<!-- <dependency>
+			<dependency>
 				<groupId>org.springframework.social</groupId>
 				<artifactId>spring-social-core</artifactId>
 				<version>1.1.6.RELEASE</version>
@@ -82,14 +92,23 @@
 				<groupId>org.springframework.social</groupId>
 				<artifactId>spring-social-web</artifactId>
 				<version>1.1.6.RELEASE</version>
-			</dependency> -->
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-pool2</artifactId>
+				<version>${commons-pool2.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
 			</dependency>
-			<!-- <dependency> <groupId>commons-lang3</groupId> <artifactId>commons-lang</artifactId> 
-				<version>${commons-lang3.version}</version> </dependency> <dependency> <groupId>commons-logging</groupId> 
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${commons-collections4.version}</version>
+			</dependency>
+			<!-- <dependency> <groupId>commons-logging</groupId> 
 				<artifactId>commons-logging</artifactId> <version>${commons-logging.version}</version> 
 				</dependency> -->
 			<dependency>
@@ -111,17 +130,25 @@
 			    <artifactId>bcprov-jdk15on</artifactId>
 			    <version>${bcprov-jdk15on.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-commons</artifactId>
-        </dependency>
+        </dependency> -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -233,5 +260,6 @@
 		<module>factory-dao</module>
 		<module>factory-job</module>
 		<module>factory-demo</module>
+		<module>factory-gateway</module>
 	</modules>
 </project>

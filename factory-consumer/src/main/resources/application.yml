@@ -18,7 +18,6 @@ spring:
 #  client:
 #    service-url:
 #      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
-
 logging:
   level:
     com.yasaka.stock.feign.MFeignClient: debug

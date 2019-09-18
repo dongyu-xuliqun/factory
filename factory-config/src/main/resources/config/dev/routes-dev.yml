@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #之所以要用bootstrap.yml，是因为启动SpringBoot项目时，会优先读取bootstrap.yml里的配置，然后才会读取application.yml.如果不通过bootstrap.yml里的配置，先从配置中心拉下相应的配置文件，就会报错
 spring:  
   cloud:
@@ -106,3 +107,50 @@ management:
     web:
       exposure:
         include: '*'
+=======
+spring: 
+  cloud:    
+    #集成eureka时开启
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      #default-filters:
+      routes:
+      #注释参考下面user-service的配置
+      - id: CONSUMER-SERVICE
+        uri: lb://CONSUMER-SERVICE
+        predicates:
+        - Path=/factory/consumer/**
+        filters:                         
+        - StripPrefix=1                        
+        #- PrefixPath=/consumer 
+      #id唯一标识，（可自定义）
+#      - id: user-service
+#                            #动态路由
+#        # lb代表从注册中心获取服务
+#        #lb协议，是网关的特有协议，自动支持负载均衡
+#        uri: lb://user-service
+#                           #路由转发规则
+#        predicates:
+#                              # 带前缀
+#        - Path=/user/{segment}
+#                            #过滤器
+#        filters:
+#        - SetPath=/{segment}
+#        - StripPrefix=1
+#      - id: publish-service
+#        uri: lb://publish
+#        predicates:
+#        - Path=/publish/**
+#        filters:
+#                            #作用： 去掉部分URL路径
+#                            #若无StripPrefix过滤器时，gateway 发送请求到后台服务spring-cloud-producer的url就是http://spring-cloud-producer/producerInEureka/hello
+#                            #若有StripPrefix过滤器时，gateway会根据StripPrefix=1所配的值（这里是1）去掉URL路径中的部分前缀（这里去掉一个前缀，即去掉producerInEureka）                           
+#                            #发送请求到后台服务spring-cloud-producer的url变成http://spring-cloud-producer/hello
+#        - StripPrefix=1
+#                             #作用：它的作用和StripPrefix正相反是在URL路径前面添加一部分的前缀
+#                            #这将会把/mypath添加到路由prefixpath_route匹配到的所有请求的路径的前面
+#                           #所以对/hello的请求将会被发送到/mypath/hello
+#        - PrefixPath=/myPath 
+>>>>>>> branch 'master' of https://github.com/dongyu-xuliqun/factory.git

@@ -63,17 +63,9 @@ spring:
 #                             #作用：它的作用和StripPrefix正相反是在URL路径前面添加一部分的前缀
 #                            #这将会把/mypath添加到路由prefixpath_route匹配到的所有请求的路径的前面
 #                           #所以对/hello的请求将会被发送到/mypath/hello
-#        - PrefixPath=/myPath 
-      
+#        - PrefixPath=/myPath      
   profiles:
-    active: dev 
-#  zipkin:
-#    base-url: http://localhost:9411
-#  sleuth:
-#    sampler:
-#      percentage: 1.0
-#  profiles:
-#    active: dev
+    active: dev
 hystrix:  
   command:
     default:
@@ -81,8 +73,7 @@ hystrix:
         isolation:
           strategy: SEMAPHORE
           thread:
-            timeoutInMilliseconds: 3000
-  
+            timeoutInMilliseconds: 3000  
   # 这样将会自动配置一个 Hystrix 并发策略插件的 hook，这个 hook 会将 SecurityContext 从主线程传输到 Hystrix 的命令。
   # 因为 Hystrix 不允许注册多个 Hystrix 策略，所以可以声明 HystrixConcurrencyStrategy
   # 为一个 Spring bean 来实现扩展。Spring Cloud 会在 Spring 的上下文中查找你的实现，并将其包装在自己的插件中。

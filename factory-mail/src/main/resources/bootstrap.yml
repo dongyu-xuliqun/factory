@@ -9,7 +9,7 @@ eureka:
 
 spring:
   application:
-    name: mail
+    name: mail-service
 #  cloud:
 #    config:
 #      discovery:

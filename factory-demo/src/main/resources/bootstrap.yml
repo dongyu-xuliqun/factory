@@ -14,6 +14,10 @@ spring:
 #       password: booszy
       name: db-mysql,db-mongodb,redis,config-rabbitmq,zipkin
       profile: ${spring.profiles.active}  
+#  security:
+#    user:
+#      name: 'admin'
+#      password: 'admin'
   profiles:
     active: dev
 #  redis:
@@ -30,6 +34,15 @@ spring:
 #      url: jdbc:mysql://127.0.0.1:3306/test
 #      username: root
 #      password: booszy 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
 logging:
   level:
     root: info

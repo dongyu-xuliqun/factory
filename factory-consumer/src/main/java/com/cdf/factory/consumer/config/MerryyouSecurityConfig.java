@@ -99,6 +99,7 @@ public class MerryyouSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/session/invalid", "/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png", "/**/*.woff2", "/code/*")
 				.permitAll()// 以上的请求都不需要认证
 				// .antMatchers("/").access("hasRole('USER')")
+				.and().authorizeRequests().antMatchers("/actuator/**").permitAll()
 				.and().csrf().disable()// 关闭csrd拦截
 		;
 		// 安全模块单独配置

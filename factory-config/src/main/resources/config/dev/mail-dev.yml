@@ -1,15 +1,12 @@
-server:
-  port: 0
-  spring:
+spring:
   mail:
     host: smtp.qq.com #邮箱服务器地址
     port: 465
     username: 854128573@qq.com #用户名
-    password: cbwhqdycntwfbgad #（改成自己的密码）
+    password: cbwhqdycntwfbgad #（改成自己的密码）    
     default-encoding: UTF-8
     properties:
       mail:
         smtp:
           ssl:
             enable: true
- 

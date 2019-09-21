@@ -18,28 +18,39 @@ spring:
     name: admin-service
   cloud:
     config:
-      #enabled: false spring boot admin 测试时注释
+      #enabled: true #标记说远程配置启用。默认为true;
       discovery:
-        enabled: true
+        enabled: true #表示开启通过服务名来访问config-server
         service-id: config-service
-      fail-fast: true
+      fail-fast: true #不作任何额外配置的情况下，失败响应有点迟钝，举个简单的例子，关掉config-server，我们直接启动config-client，此时启动会报错，但是报错时间较晚，报错的时候系统已经打印了许多启动日志了，如果我们希望在启动失败时能够快速响应
 #       username: root
 #       password: booszy
-      name: mail,admin #db-mysql,rabbitmq,zipkin
+      name: mail,admin,actuator #db-mysql,rabbitmq
       profile: ${spring.profiles.active}
+    consul:
+      host: 127.0.0.1 #consul节点IP
+      port: 8500       #consul节点端口
+      discovery:
+        #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
+        #instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        #health-check-path: /actuator/health #健康检查,默认配置，可以注释掉
+        #health-check-interval: 10s #默认配置10s，可以注释掉
+        #tags: user.name=${spring.security.user.name}, user.password=${spring.security.user.password}
+        tags: user.name=admin, user.password=admin #这个想才用远程配置的话，得先解决application.yml配置加载不上的问题，得能合并远程和项目里的application.yml的配置
   profiles:
     active: dev 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
- #       exclude: configprops  #排除对配置信息的监控，每次浏览这个节点的时候，
-          #数据库的链接就一直释放不掉，最后导致超时，因为配置信息的监控也不重要，
-          #就不再监控这个节点，以下为可监控的endpoint。可以根据需要有选择的进行监控。
-            #- health,status,env,metrics,dump,jolokia,info,
-            #configprops,trace,logfile,refresh,flyway,
-            #liquibase,heapdump,loggers,auditevents,hystrix.stream,activiti      
-  endpoint:
-    health:
-      show-details: ALWAYS    
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+# #       exclude: configprops  #排除对配置信息的监控，每次浏览这个节点的时候，
+#          #数据库的链接就一直释放不掉，最后导致超时，因为配置信息的监控也不重要，
+#          #就不再监控这个节点，以下为可监控的endpoint。可以根据需要有选择的进行监控。
+#            #- health,status,env,metrics,dump,jolokia,info,
+#            #configprops,trace,logfile,refresh,flyway,
+#            #liquibase,heapdump,loggers,auditevents,hystrix.stream,activiti      
+#  endpoint:
+#    health:
+#      show-details: ALWAYS    

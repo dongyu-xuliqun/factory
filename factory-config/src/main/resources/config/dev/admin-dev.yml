@@ -13,8 +13,8 @@ spring:
           from: 854128573@qq.com
           #to: xuliqunpersonal@hotmail.com
           to: 854128573@qq.com         
-#  security:
-#    user:
-#      name: admin
-#      password: admin
+  security:
+    user:
+      name: admin
+      password: admin
   

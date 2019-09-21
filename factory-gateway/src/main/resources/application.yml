@@ -1,24 +1,13 @@
-spring:
-  cloud:   
-    consul:
-      host: 127.0.0.1 #consul节点IP
-      port: 8500       #consul节点端口
-      discovery:
-                             #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
-        instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
-        health-check-path: /actuator/health #健康检查
-        health-check-interval: 10s
-
-#eureka:
-#  instance:
-#    prefer-ip-address: true    
-#    #non-secure-port: ${server.port:8888}
-#    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${random.int}:@project.version@
-#    appname: ${spring.application.name}   
-#  client:
-#    service-url:
-#      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
-#      #http://${eureka.instance.hostname}:${eureka.port}/eureka/
+#spring:
+#  cloud:   
+#    consul:
+#      host: 127.0.0.1
+#      port: 8500
+#      discovery:
+#                             #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
+#        instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
+#        health-check-path: /actuator/health #健康检查
+#        health-check-interval: 10s
 #spring:
 #  profiles:
 #    active: csdn

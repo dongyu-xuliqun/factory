@@ -1,3 +1,4 @@
+#配置查看factory-admin里application.yml的配置说明，目前在使用配置中心时，当前application.yml文件貌似读不到，不起作用，故都放入bootstrap.yml文件中
 #eureka:
 #  client:
 #    registryFetchIntervalSeconds: 5
@@ -13,17 +14,16 @@
 #    metadata-map:
 #      user.name: ${spring.security.user.name}
 #      user.password: ${spring.security.user.password}
-spring:
-  cloud:   
-    consul:
-      host: 127.0.0.1 #consul节点IP
-      port: 8500       #consul节点端口
-      discovery:
-                           #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
-        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
-        #instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
-        #health-check-path: /actuator/health #健康检查
-        health-check-interval: 10s
+#spring:
+#  cloud:   
+#    consul:
+#      host: 127.0.0.1 #consul节点IP
+#      port: 8500       #consul节点端口
+#      discovery:
+        #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
+#        instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
+        #health-check-path: /actuator/health #健康检查,默认配置，可以注释掉
+        #health-check-interval: 10s #默认配置10s，可以注释掉
         #tags: user.name=${spring.security.user.name}, user.password=${spring.security.user.password}
         #tags: user.name=admin, user.password=admin
         #tags: management.context-path=/foo, health.path=/ping #, user.name=user, user.password=password

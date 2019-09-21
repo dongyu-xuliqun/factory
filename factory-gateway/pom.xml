@@ -21,11 +21,7 @@
 			<groupId>com.cdf.factory</groupId>
 			<artifactId>factory-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-        </dependency>
+		</dependency>		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
@@ -76,14 +72,14 @@
 	        <groupId>org.springframework.cloud</groupId>
 	        <artifactId>spring-cloud-starter-gateway</artifactId>
 	    </dependency>	    
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- Spring-Cloud-Gateway基于Netty的运行时环境启动，不需要引入带Servlet容器的spring-boot-starter-web -->
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>

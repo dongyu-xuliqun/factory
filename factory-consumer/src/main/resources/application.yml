@@ -1,52 +1,48 @@
-spring:
-  cloud:   
-    consul:
-      host: 127.0.0.1 #consul节点IP
-      port: 8500       #consul节点端口
-      discovery:
-                             #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
-        instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
-        health-check-path: /actuator/health #健康检查
-        health-check-interval: 10s
+#配置查看factory-admin里application.yml的配置说明
+#spring:
+#  application:
+#    name: consumer-service
+#  cloud:
+#    consul:
+#      host: 127.0.0.1
+#      port: 8500
+#      discovery:
+                         #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'.   
+        #instance-id: ${spring.application.name}:{random.value}                  
+#        instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
+        #health-check-path: /actuator/health #健康检查
+        #health-check-interval: 10s
 
-#eureka:
-#  instance:
-#    prefer-ip-address: true    
-#    #non-secure-port: ${server.port:8888}
-#    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${random.int}:@project.version@
-#    appname: ${spring.application.name}   
-#  client:
-#    service-url:
-#      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/,http://server3:8763/eureka/
-logging:
-  level:
-    com.yasaka.stock.feign.MFeignClient: debug
-    org.springframework.security: DEBUG
-feign:
-  hystrix:
-    enabled: true
-ribbon:
-  ReadTimeout:  30000
-  ConnectTimeout:  15000
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 100000
-            
-merryyou:
-  security:
-    code:
-      image:
-        width: 90
-        height: 20
-        length: 4
-        expireIn: 30
-        url: /code/*
-    session:
-      maximumSessions: 1
-      maxSessionsPreventsLogin: false
-#      sessionInvalidUrl : /merryyou-session-invalid.html
-    loginType: JSON
+#feign:
+#  hystrix:
+#    enabled: true
+#ribbon:
+#  ReadTimeout:  30000
+#  ConnectTimeout:  15000
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 100000
+#            
+#merryyou:
+#  security:
+#    code:
+#      image:
+#        width: 90
+#        height: 20
+#        length: 4
+#        expireIn: 30
+#        url: /code/*
+#    session:
+#      maximumSessions: 1
+#      maxSessionsPreventsLogin: false
+##      sessionInvalidUrl : /merryyou-session-invalid.html
+#    loginType: JSON    
+#    
+#logging:
+#  level:
+#    com.yasaka.stock.feign.MFeignClient: debug
+#    org.springframework.security: DEBUG

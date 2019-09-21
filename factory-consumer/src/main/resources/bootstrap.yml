@@ -7,40 +7,27 @@ spring:
   application:
     name: consumer-service
   cloud:
-    config:
+    config:      
       discovery:
         enabled: true
         service-id: config-service
       fail-fast: true
 #       username: root
 #       password: booszy
-      name: db-mysql,rabbitmq,zipkin
+      name: db-mysql,rabbitmq,zipkin,actuator
       profile: ${spring.profiles.active}
-#  zipkin:
-#    base-url: http://localhost:9411/
-#    sender:
-#      type: WEB
-#  sleuth:
-#    web:
-#      client:
-#        enabled: true
-#    sampler:
-#      probability: 1.0
+    consul:
+      host: 127.0.0.1  #consul节点IP
+      port: 8500       #consul节点端口      
+      discovery:
+        #prefer-ip-address: true #这个可以设置为true
+        #ip-address: xxx
+        #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
+        #instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}        
+        #health-check-path: /actuator/health #健康检查,默认配置，可以注释掉
+        #health-check-interval: 10s #默认配置10s，可以注释掉
+        #tags: management.context-path=/foo, health.path=/ping #, user.name=user, user.password=password
+       
   profiles:
-    active: dev 
-#  zipkin:
-#    base-url: http://localhost:9411
-#  sleuth:
-#    sampler:
-#      percentage: 1.0
-#  profiles:
-#    active: dev
-#新版配置，否则后面dashboard无法找到hystrix.stream
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: ALWAYS
+    active: dev

@@ -13,8 +13,21 @@ spring:
       fail-fast: true
 #       username: root
 #       password: booszy
-      name: db-mysql,db-mongodb,config-rabbitmq,routes,redis,zipkin
+      name: db-mysql,db-mongodb,config-rabbitmq,routes,redis,zipkin,actuator
       profile: ${spring.profiles.active} 
+    consul:
+      host: 127.0.0.1  #consul节点IP
+      port: 8500       #consul节点端口      
+      discovery:
+        #prefer-ip-address: true #这个可以设置为true
+        #ip-address: xxx
+        #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
+        #instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}        
+        #health-check-path: /actuator/health #健康检查,默认配置，可以注释掉
+        #health-check-interval: 10s #默认配置10s，可以注释掉
+        #tags: management.context-path=/foo, health.path=/ping #, user.name=user, user.password=password
+       
     #集成eureka时开启    gateway:      discovery:        locator:          enabled: true
       default-filters:
       routes:
@@ -78,12 +91,3 @@ hystrix:
   # 因为 Hystrix 不允许注册多个 Hystrix 策略，所以可以声明 HystrixConcurrencyStrategy
   # 为一个 Spring bean 来实现扩展。Spring Cloud 会在 Spring 的上下文中查找你的实现，并将其包装在自己的插件中。
   shareSecurityContext: true
-#新版配置，否则后面dashboard无法找到hystrix.stream
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: ALWAYS

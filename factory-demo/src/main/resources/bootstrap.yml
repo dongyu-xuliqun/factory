@@ -6,14 +6,28 @@ spring:
     name: demo-service
   cloud:
     config:
+      #enabled: true #标记说远程配置启用,默认为true
       discovery:
         enabled: true
         service-id: config-service
       fail-fast: true
 #       username: root
 #       password: booszy
-      name: db-mysql,db-mongodb,redis,config-rabbitmq,zipkin
-      profile: ${spring.profiles.active}  
+      name: db-mysql,db-mongodb,redis,config-rabbitmq,zipkin,actuator
+      profile: ${spring.profiles.active} 
+    consul:
+      host: 127.0.0.1  #consul节点IP
+      port: 8500       #consul节点端口      
+      discovery:
+        #prefer-ip-address: true #这个可以设置为true
+        #ip-address: xxx
+        #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
+        #instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}        
+        #health-check-path: /actuator/health #健康检查,默认配置，可以注释掉
+        #health-check-interval: 10s #默认配置10s，可以注释掉
+        #tags: management.context-path=/foo, health.path=/ping #, user.name=user, user.password=password
+       
 #  security:
 #    user:
 #      name: 'admin'
@@ -34,15 +48,9 @@ spring:
 #      url: jdbc:mysql://127.0.0.1:3306/test
 #      username: root
 #      password: booszy 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: ALWAYS
 
+#配置查看factory-admin里application.yml的配置说明
+    
 logging:
   level:
     root: info

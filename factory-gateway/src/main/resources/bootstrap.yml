@@ -91,3 +91,10 @@ hystrix:
   # 因为 Hystrix 不允许注册多个 Hystrix 策略，所以可以声明 HystrixConcurrencyStrategy
   # 为一个 Spring bean 来实现扩展。Spring Cloud 会在 Spring 的上下文中查找你的实现，并将其包装在自己的插件中。
   shareSecurityContext: true
+  
+logging:
+  #config: classpath=logback-spring.xml
+  path: D:\stsworkspace2\factory\data\logs
+  file: ${spring.application.name}
+  level:
+    ROOT: DEBUG

@@ -14,7 +14,7 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:/config/dev, classpath:/config/prod
+          search-locations: classpath:/config, classpath:/config/dev, classpath:/config/prod
 #    bus:   #TODO
 #      trace:
 #        enabled: true

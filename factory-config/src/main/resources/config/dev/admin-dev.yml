@@ -1,6 +1,6 @@
 spring:
   boot:
-    admin:      
+    admin:          
 #      discovery:
 #        ignored-services: consul
       ui:
@@ -10,6 +10,8 @@ spring:
         #brand: "<img src='assets/img/icon-spring-boot-admin.svg'><span>应用监控管理</span>"
       notify:
         mail:
+          ignore-changes: 
+          - ""         
           from: 854128573@qq.com
           #to: xuliqunpersonal@hotmail.com
           to: 854128573@qq.com         

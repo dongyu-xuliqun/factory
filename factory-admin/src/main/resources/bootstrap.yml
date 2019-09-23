@@ -15,7 +15,7 @@ server:
 #之所以要用bootstrap.yml，是因为启动SpringBoot项目时，会优先读取bootstrap.yml里的配置，然后才会读取application.yml.如果不通过bootstrap.yml里的配置，先从配置中心拉下相应的配置文件，就会报错
 spring:
   application:
-    name: admin-service
+    name: admin-service  
   cloud:
     config:
       #enabled: true #标记说远程配置启用。默认为true;
@@ -54,3 +54,10 @@ spring:
 #  endpoint:
 #    health:
 #      show-details: ALWAYS    
+
+logging:
+  #config: classpath=logback-spring.xml
+  path: D:\stsworkspace2\factory\data\logs
+  file: ${spring.application.name}
+  level:
+    ROOT: DEBUG

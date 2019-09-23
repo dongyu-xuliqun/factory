@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: demo-service
+  output:
+    ansi:
+      enabled: always
   cloud:
     config:
       #enabled: true #标记说远程配置启用,默认为true
@@ -50,11 +53,19 @@ spring:
 #      password: booszy 
 
 #配置查看factory-admin里application.yml的配置说明
-    
+#logging:
+#  config: classpath:logback-application.xml
+
+#debug: true #控制台输出debug
+ 
 logging:
+  #config: classpath=logback-spring.xml
+  path: D:\stsworkspace2\factory\data\logs
+  file: ${spring.application.name}
   level:
-    root: info
-    org.hibernate : info
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-    com.yasaka.stock : debug
+    ROOT: DEBUG
+#除了查看 metric 端点外， Spring Boot Actuator 还提供了停止应用程序的端点。然而，与其他端点不同的是，缺省情况下，此端点是不可用的。我们必须把 management.endpoint.shutdown.enabled 设为 true 。在那之后，我们就可以通过发送一个 POST 请求到 /actuator/shutdown 端点来停止应用程序了
+management:
+  endpoint:
+    shutdown:
+      enabled: true

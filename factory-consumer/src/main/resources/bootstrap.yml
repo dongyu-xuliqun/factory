@@ -31,3 +31,9 @@ spring:
        
   profiles:
     active: dev
+logging:
+  #config: classpath=logback-spring.xml
+  path: D:\stsworkspace2\factory\data\logs
+  file: ${spring.application.name}
+  level:
+    ROOT: DEBUG

@@ -14,7 +14,7 @@ spring:
       fail-fast: true
 #       username: root
 #       password: booszy
-      name: db-mysql,rabbitmq,zipkin,actuator
+      name: rabbitmq,zipkin,actuator #,db-mysql
       profile: ${spring.profiles.active}
     consul:
       host: 127.0.0.1  #consul节点IP

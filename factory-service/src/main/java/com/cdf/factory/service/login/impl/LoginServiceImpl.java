@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import com.cdf.factory.common.util.MD5Util;
 import com.cdf.factory.dao.mysql.UserRepository;
 import com.cdf.factory.entity.User;
-import com.cdf.factory.service.login.ILoginService;
+import com.cdf.factory.service.login.LoginService;
 
 @Service
-public class LoginServiceImpl implements ILoginService {
+public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	UserRepository userRepository;

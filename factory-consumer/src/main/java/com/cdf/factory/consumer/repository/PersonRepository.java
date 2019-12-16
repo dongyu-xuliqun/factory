@@ -2,9 +2,12 @@ package com.cdf.factory.consumer.repository;
 
 import java.util.List;
 
+import javax.persistence.Table;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cdf.factory.consumer.domain.Person;
+import com.cdf.factory.consumer.entity.OrderDO;
 
 /**
  * Created on 2017/11/7.

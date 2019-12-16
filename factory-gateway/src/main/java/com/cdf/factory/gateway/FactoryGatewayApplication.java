@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//@RefreshScope
+@RefreshScope
 @EnableHystrix
 public class FactoryGatewayApplication {
 

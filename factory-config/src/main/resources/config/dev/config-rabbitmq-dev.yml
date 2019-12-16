@@ -12,61 +12,61 @@ spring:
       #publisher-confirms: false 开启Publisher Confirm机制 消息有没有到达MQ（会返回一个ack确认码）
       #publisher-returns: false 开启publisher Return机制 消息有没有找到合适的队列
             
-      connection-timeout: 0 #连接超时参数单位为毫秒：设置为“0”代表无穷大
-      dynamic: true # 默认创建一个AmqpAdmin的Bean
-      
-      #缓存
-      cache: 
-          channel:
-               checkout-timeout: 3 #当缓存已满时，获取Channel的等待时间，单位为毫秒
-               size: 3 # 缓存中保持的Channel数量
-          connection:
-              mode: channel #连接缓存的模式 
-              #size: 10 #缓存的连接数 When the cache mode is 'CHANNEL', the connection cache size cannot be configured
-      template:
-          retry:
-              enabled: true #设置为true的时候RabbitTemplate能够实现重试
-              max-attempts: 5 #最大重试次数
-              initial-interval: 1000 #重试间隔时间（单位毫秒）
-              multiplier: 1.0 #应用于前一重试间隔的乘法器
-              max-interval: 10000 #l  两次尝试的最大时间间隔
-          mandatory: false #启用强制信息 参数设为 true 时，交换器无法根据自身的类型和路由键找到一个符合条件 的队列，那么 RabbitM 会调用 Basic.Return 命令将消息返回给生产者。默认为false,直接丢弃
-          receive-timeout: 10 #receive()方法的超时时间
-          reply-timeout: 1000 #sendAndReceive()方法的超时时间
-          exchange: "exchange_approve" #默认的exchange
-          routing-key: "queue_approve" #默认的routingkey
-          
-      listener:
-          type : DIRECT # SIMPLE/DIRECT #MQ两种消息传输方式，点对点（代码中的简单传递模式），发布/订阅（代码中路由模式） 对应simple和direct模式，simple又有两种工作模式（1.一个生产者，一个消费者和2。一个生产者，多个消费者。区别是代码中一个方法监听一个队列和多个方法监听一个队列），direct有4种路由模式
-          direct:
-              retry:
-                  stateless: true #不论重试是有状态的还是无状态的
-                  enabled: true #是否开启消费者重试（为false时关闭消费者重试，这时消费端代码异常会一直重复收到消息）
-                  max-attempts: 5 #最大重试次数
-                  initial-interval: 1000 #重试间隔时间（单位毫秒）
-                  multiplier: 1.0 #应用于前一重试间隔的乘法器
-                  max-interval: 10000 #l  两次尝试的最大时间间隔
-              auto-startup: true #启动时自动启动容器
-              acknowledge-mode: manual #手动确认模式，推荐使用这种。就是说当消息被消费者消费时，需要手动返回信息告诉mq。如果是自动的话，mq会自动确认，不管你消费者是否完成消费（比如说抛出异常）
-              prefetch: 1 #在单个请求中处理的消息个数，他应该大于等于事务数量
-              #default-requeue-rejected : true # 投递失败时是否重新排队
-              #idle-event-interval: 500
-                            
-              #consumers-per-queue: 2 #一个队列可以被多少消费者消费（这个配置，我测试的时候没测试出来，如果有朋友了解的话，可以评论下。）
-          simple:
-              retry:
-                  stateless: true #不论重试是有状态的还是无状态的
-                  enabled: true #是否开启消费者重试（为false时关闭消费者重试，这时消费端代码异常会一直重复收到消息）
-                  max-attempts: 5 #最大重试次数
-                  initial-interval: 1000 #重试间隔时间（单位毫秒）
-                  multiplier: 1.0 #应用于前一重试间隔的乘法器
-                  max-interval: 10000 #l  两次尝试的最大时间间隔
-              auto-startup: true #启动时自动启动容器
-              acknowledge-mode: AUTO #容器的acknowledge模式
-              prefetch: 1 #在单个请求中处理的消息个数，他应该大于等于事务数量
-              #default-requeue-rejected : true # 投递失败时是否重新排队
-              #idle-event-interval: 500
-              
-              #concurrency: 1 #消费者的最少数量
-              #max-concurrency: 1 #消费者的最大数量
-              #transaction-size: 1 #在一个事务中处理的消息数量。为了获得最佳效果，该值应设置为小于等于每个请求中处理的消息个数，即spring.rabbitmq.listener.prefetch的值
+#      connection-timeout: 0 #连接超时参数单位为毫秒：设置为“0”代表无穷大
+#      dynamic: true # 默认创建一个AmqpAdmin的Bean
+#      
+#      #缓存
+#      cache: 
+#          channel:
+#               checkout-timeout: 3 #当缓存已满时，获取Channel的等待时间，单位为毫秒
+#               size: 3 # 缓存中保持的Channel数量
+#          connection:
+#              mode: channel #连接缓存的模式 
+#              #size: 10 #缓存的连接数 When the cache mode is 'CHANNEL', the connection cache size cannot be configured
+#      template:
+#          retry:
+#              enabled: true #设置为true的时候RabbitTemplate能够实现重试
+#              max-attempts: 5 #最大重试次数
+#              initial-interval: 1000 #重试间隔时间（单位毫秒）
+#              multiplier: 1.0 #应用于前一重试间隔的乘法器
+#              max-interval: 10000 #l  两次尝试的最大时间间隔
+#          mandatory: false #启用强制信息 参数设为 true 时，交换器无法根据自身的类型和路由键找到一个符合条件 的队列，那么 RabbitM 会调用 Basic.Return 命令将消息返回给生产者。默认为false,直接丢弃
+#          receive-timeout: 10 #receive()方法的超时时间
+#          reply-timeout: 1000 #sendAndReceive()方法的超时时间
+##          exchange: "exchange_approve" #默认的exchange
+##          routing-key: "queue_approve" #默认的routingkey
+#          
+#      listener:
+#          type : DIRECT # SIMPLE/DIRECT #MQ两种消息传输方式，点对点（代码中的简单传递模式），发布/订阅（代码中路由模式） 对应simple和direct模式，simple又有两种工作模式（1.一个生产者，一个消费者和2。一个生产者，多个消费者。区别是代码中一个方法监听一个队列和多个方法监听一个队列），direct有4种路由模式
+#          direct:
+#              retry:
+#                  stateless: true #不论重试是有状态的还是无状态的
+#                  enabled: true #是否开启消费者重试（为false时关闭消费者重试，这时消费端代码异常会一直重复收到消息）
+#                  max-attempts: 5 #最大重试次数
+#                  initial-interval: 1000 #重试间隔时间（单位毫秒）
+#                  multiplier: 1.0 #应用于前一重试间隔的乘法器
+#                  max-interval: 10000 #l  两次尝试的最大时间间隔
+#              auto-startup: true #启动时自动启动容器
+#              acknowledge-mode: manual #手动确认模式，推荐使用这种。就是说当消息被消费者消费时，需要手动返回信息告诉mq。如果是自动的话，mq会自动确认，不管你消费者是否完成消费（比如说抛出异常）
+#              prefetch: 1 #在单个请求中处理的消息个数，他应该大于等于事务数量
+#              #default-requeue-rejected : true # 投递失败时是否重新排队
+#              #idle-event-interval: 500
+#                            
+#              #consumers-per-queue: 2 #一个队列可以被多少消费者消费（这个配置，我测试的时候没测试出来，如果有朋友了解的话，可以评论下。）
+#          simple:
+#              retry:
+#                  stateless: true #不论重试是有状态的还是无状态的
+#                  enabled: true #是否开启消费者重试（为false时关闭消费者重试，这时消费端代码异常会一直重复收到消息）
+#                  max-attempts: 5 #最大重试次数
+#                  initial-interval: 1000 #重试间隔时间（单位毫秒）
+#                  multiplier: 1.0 #应用于前一重试间隔的乘法器
+#                  max-interval: 10000 #l  两次尝试的最大时间间隔
+#              auto-startup: true #启动时自动启动容器
+#              acknowledge-mode: AUTO #容器的acknowledge模式
+#              prefetch: 1 #在单个请求中处理的消息个数，他应该大于等于事务数量
+#              #default-requeue-rejected : true # 投递失败时是否重新排队
+#              #idle-event-interval: 500
+#              
+#              #concurrency: 1 #消费者的最少数量
+#              #max-concurrency: 1 #消费者的最大数量
+#              #transaction-size: 1 #在一个事务中处理的消息数量。为了获得最佳效果，该值应设置为小于等于每个请求中处理的消息个数，即spring.rabbitmq.listener.prefetch的值

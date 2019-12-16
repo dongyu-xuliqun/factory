@@ -26,6 +26,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 /**
@@ -114,11 +115,11 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 	@Bean
 	public TokenStore tokenStore() {
 		return new JdbcTokenStore(dataSource);
-		// return new JwtTokenStore(accessTokenConverter());
+		//return new JwtTokenStore(accessTokenConverter());
 	}
 
 	/**
-	 * 注入自定义token生成方式
+	 * 注入自定义token生成方式，jwt中添加额外的信息
 	 *
 	 * @return
 	 */

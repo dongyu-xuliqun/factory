@@ -78,24 +78,36 @@ public class Controller {
 				"http://127.0.0.1:8102/oauth/token?grant_type=authorization_code&code=%s&client_id=barClientIdPassword&client_secret=secret&scope=test&redirect_uri=%s",
 				code, "http://127.0.0.1:8102/auth/");		
 
-        HttpResponse response = new DefaultHttpClient().execute(new HttpGet(url));
-        String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+        HttpResponse response = new DefaultHttpClient().execute(new HttpGet(url));        
         if(response.getStatusLine().getStatusCode()== HttpStatus.SC_OK){
+        	String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+        	System.out.println(result);
             Map<String, String> map = JSONObject.parseObject(result, new TypeReference<Map<String, String>>() {
 			});             
             String token = map.get("access_token");
-            String name = map.get("user_name");
+            System.out.println(token.substring(token.indexOf(".")+1, token.lastIndexOf(".")));
+            
+            String name = map.get("username");
             String username = map.get("user_name");
             String id = map.get("id");
             String email = "854128573@qq.com";
             String expireTime = map.get("expires_in");
             String jti = map.get("jti");
+            String avatar= map.get("avatar");
             // 根据client_id去数据库中找redirect_url
+//            StringBuilder sb = new StringBuilder().append("http://localhost:4200/#/callback/customer?");
+//            map.forEach((key, value)->{
+//            	sb.append(key);
+//            	sb.append("=");
+//            	sb.append(value);
+//            	sb.append("&");
+//            });
+//            sb.substring(0, sb.lastIndexOf("&"));
             //TODO
-            //拼接参数       
+            //拼接参数
             // 这里可以只获取token，然后再获取用户信息
-            String url2 = "http://localhost:4200/#/callback/customer?token="+ token +"&name="+name+"&username="+username+"&id="+id+"&email="+email;            
-            httpResponse.sendRedirect(url2);
+            String url2 = "http://localhost:4200/#/callback/customer?token="+ token +"&name="+name+"&username="+username+"&id="+id+"&email="+email+"&avatar="+avatar;            
+            httpResponse.sendRedirect(url2); //sb.toString()
             return;
         }		
 		return;

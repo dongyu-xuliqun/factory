@@ -2,14 +2,35 @@ server:
   port: 8400
 spring:
   profiles:
-    active: csdn
-zuul:
+    active: dev
+zuul:    
   routes:
     consumer: /consumer/**
     service: /service/**
     consumer-feign: /consumerfeign/**
     auth-client: /authClient/**
-    auth-service: /authService/**
+    auth-service:
+                  #响应的路径
+      path: /authService/**
+                  #敏感头信息
+      sensitiveHeaders:
+                  #重定向到的服务（根据服务id名称从注册中心获取服务地址）
+      serviceId: auth-service
+  #添加代理头
+  add-proxy-headers: true
+security:  
+  oauth2:
+    client:    
+      access-token-uri:http: http://localhost:8102/oauth/token
+      user-authorization-uri: http://localhost:8102/oauth/authorize
+      client-id: barClientIdPassword
+      client-secret: secret
+      clientAuthenticationScheme: form
+    resource:
+#      user-info-uri: http://localhost:8102/api/v1/users/principal
+#      prefer-token-info: false
+      jwt:
+        key-value: springcloud123    
 hystrix:
   command:
     default:
@@ -17,7 +38,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 80000
-
 # keycloak:
 #   realm : springcloud-zuul
 #   auth-server-url : http://127.0.0.1:8080/auth

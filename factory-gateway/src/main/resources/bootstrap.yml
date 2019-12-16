@@ -1,5 +1,5 @@
 server:
-  port: 10010
+  port: 80
 
 #之所以要用bootstrap.yml，是因为启动SpringBoot项目时，会优先读取bootstrap.yml里的配置，然后才会读取application.yml.如果不通过bootstrap.yml里的配置，先从配置中心拉下相应的配置文件，就会报错
 spring:
@@ -16,10 +16,10 @@ spring:
       name: db-mysql,db-mongodb,config-rabbitmq,routes,redis,zipkin,actuator
       profile: ${spring.profiles.active} 
     consul:
-      host: 127.0.0.1  #consul节点IP
+      host: 10.0.50.127  #consul节点IP
       port: 8500       #consul节点端口      
       discovery:
-        #prefer-ip-address: true #这个可以设置为true
+        prefer-ip-address: true #这个可以设置为true
         #ip-address: xxx
         #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
         #instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
@@ -31,11 +31,23 @@ spring:
     #集成eureka时开启    gateway:      discovery:        locator:          enabled: true
       default-filters:
       routes:
+      - id: oauth-service
+        uri: lb://auth-service
+        predicates:
+        - Path=/auth/**
+        filters:                         
+        - StripPrefix=1
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+        filters:                         
+        - StripPrefix=1      
                      #注释参考下面user-service的配置
       - id: consumer-service
         uri: lb://consumer-service
         predicates:
-        - Path=/factory/consumer/**
+        - Path=/consumer/**
         filters:                         
         - StripPrefix=1
         - name: Hystrix
@@ -79,6 +91,15 @@ spring:
 #        - PrefixPath=/myPath      
   profiles:
     active: dev
+              #        registration:  #security:
+#  oauth2:
+#    authorization:
+#      jwt:
+#        key-value:     
+management:
+  endpoint:
+    health:
+      show-details: always
 hystrix:  
   command:
     default:

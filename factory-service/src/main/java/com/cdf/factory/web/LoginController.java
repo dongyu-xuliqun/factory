@@ -11,13 +11,15 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cdf.factory.service.login.ILoginService;
+import com.cdf.factory.common.enums.ResponseDTO;
+import com.cdf.factory.service.login.LoginService;
 
 import reactor.core.publisher.Mono;
 
@@ -25,7 +27,7 @@ import reactor.core.publisher.Mono;
 public class LoginController {
 
 	@Autowired
-	ILoginService loginService;
+	LoginService loginService;
 
 	@GetMapping("/login/user")
 	public Mono<String> sayHelloWorld(@PathVariable("msg") String msg) {
@@ -33,9 +35,384 @@ public class LoginController {
 		System.out.println("come on " + msg);
 		return Mono.just("sc-provider receive : " + msg);
 	}
+	
+	@GetMapping("/app/datajson")
+	public ResponseDTO<String> appMenu() {
+		String menuJsonString="{\r\n" + 
+				"  \"app\": {\r\n" + 
+				"    \"name\": \"Alain\",\r\n" + 
+				"    \"description\": \"Ng-zorro admin panel front-end framework\"\r\n" + 
+				"  },\r\n" + 
+				"  \"user\": {\r\n" + 
+				"    \"name\": \"Admin\",\r\n" + 
+				"    \"avatar\": \"./assets/tmp/img/avatar.jpg\",\r\n" + 
+				"    \"email\": \"cipchk@qq.com\"\r\n" + 
+				"  },\r\n" + 
+				"  \"menu\": [\r\n" + 
+				"    {\r\n" + 
+				"      \"text\": \"主导航\",\r\n" + 
+				"      \"i18n\": \"menu.main\",\r\n" + 
+				"      \"group\": true,\r\n" + 
+				"      \"hideInBreadcrumb\": true,\r\n" + 
+				"      \"children\": [\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"仪表盘\",\r\n" + 
+				"          \"i18n\": \"menu.dashboard\",\r\n" + 
+				"          \"icon\": \"anticon-dashboard\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"仪表盘V1\",\r\n" + 
+				"              \"link\": \"/dashboard/v1\",\r\n" + 
+				"              \"i18n\": \"menu.dashboard.v1\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"分析页\",\r\n" + 
+				"              \"link\": \"/dashboard/analysis\",\r\n" + 
+				"              \"i18n\": \"menu.dashboard.analysis\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"监控页\",\r\n" + 
+				"              \"link\": \"/dashboard/monitor\",\r\n" + 
+				"              \"i18n\": \"menu.dashboard.monitor\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"工作台\",\r\n" + 
+				"              \"link\": \"/dashboard/workplace\",\r\n" + 
+				"              \"i18n\": \"menu.dashboard.workplace\"\r\n" + 
+				"            }            \r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"快捷菜单\",\r\n" + 
+				"          \"i18n\": \"menu.shortcut\",\r\n" + 
+				"          \"icon\": \"anticon-rocket\",\r\n" + 
+				"          \"shortcutRoot\": true,\r\n" + 
+				"          \"children\": []\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"小部件\",\r\n" + 
+				"          \"i18n\": \"menu.widgets\",\r\n" + 
+				"          \"link\": \"/widgets\",\r\n" + 
+				"          \"icon\": \"anticon-appstore\",\r\n" + 
+				"          \"badge\": 2\r\n" + 
+				"        }\r\n" + 
+				"      ]\r\n" + 
+				"    },\r\n" + 
+				"    {\r\n" + 
+				"      \"text\": \"商户端\",\r\n" + 
+				"      \"i18n\": \"menu.partner\",      \r\n" + 
+				"      \"children\": [\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"订单\",\r\n" + 
+				"          \"link\": \"/business/order\",\r\n" + 
+				"          \"i18n\": \"menu.dashboard.order\",\r\n" + 
+				"          \"icon\": \"anticon-wallet\"\r\n" + 
+				"        }\r\n" + 
+				"      ]\r\n" + 
+				"    },\r\n" + 
+				"    {\r\n" + 
+				"      \"text\": \"Alain\",\r\n" + 
+				"      \"i18n\": \"menu.alain\",\r\n" + 
+				"      \"group\": true,\r\n" + 
+				"      \"hideInBreadcrumb\": true,\r\n" + 
+				"      \"children\": [\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"样式\",\r\n" + 
+				"          \"i18n\": \"menu.style\",\r\n" + 
+				"          \"icon\": \"anticon-info\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Typography\",\r\n" + 
+				"              \"link\": \"/style/typography\",\r\n" + 
+				"              \"i18n\": \"menu.style.typography\",\r\n" + 
+				"              \"shortcut\": true\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Grid Masonry\",\r\n" + 
+				"              \"link\": \"/style/gridmasonry\",\r\n" + 
+				"              \"i18n\": \"menu.style.gridmasonry\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Colors\",\r\n" + 
+				"              \"link\": \"/style/colors\",\r\n" + 
+				"              \"i18n\": \"menu.style.colors\"\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Delon\",\r\n" + 
+				"          \"i18n\": \"menu.delon\",\r\n" + 
+				"          \"icon\": \"anticon-bulb\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Dynamic Form\",\r\n" + 
+				"              \"link\": \"/delon/form\",\r\n" + 
+				"              \"i18n\": \"menu.delon.form\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Simple Table\",\r\n" + 
+				"              \"link\": \"/delon/st\",\r\n" + 
+				"              \"i18n\": \"menu.delon.table\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Util\",\r\n" + 
+				"              \"link\": \"/delon/util\",\r\n" + 
+				"              \"i18n\": \"menu.delon.util\",\r\n" + 
+				"              \"acl\": \"role-a\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Print\",\r\n" + 
+				"              \"link\": \"/delon/print\",\r\n" + 
+				"              \"i18n\": \"menu.delon.print\",\r\n" + 
+				"              \"acl\": \"role-b\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"QR\",\r\n" + 
+				"              \"link\": \"/delon/qr\",\r\n" + 
+				"              \"i18n\": \"menu.delon.qr\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"ACL\",\r\n" + 
+				"              \"link\": \"/delon/acl\",\r\n" + 
+				"              \"i18n\": \"menu.delon.acl\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Route Guard\",\r\n" + 
+				"              \"link\": \"/delon/guard\",\r\n" + 
+				"              \"i18n\": \"menu.delon.guard\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Cache\",\r\n" + 
+				"              \"link\": \"/delon/cache\",\r\n" + 
+				"              \"i18n\": \"menu.delon.cache\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Down File\",\r\n" + 
+				"              \"link\": \"/delon/downfile\",\r\n" + 
+				"              \"i18n\": \"menu.delon.downfile\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Xlsx\",\r\n" + 
+				"              \"link\": \"/delon/xlsx\",\r\n" + 
+				"              \"i18n\": \"menu.delon.xlsx\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Zip\",\r\n" + 
+				"              \"link\": \"/delon/zip\",\r\n" + 
+				"              \"i18n\": \"menu.delon.zip\"\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        }\r\n" + 
+				"      ]\r\n" + 
+				"    },\r\n" + 
+				"    {\r\n" + 
+				"      \"text\": \"Pro\",\r\n" + 
+				"      \"i18n\": \"menu.pro\",\r\n" + 
+				"      \"group\": true,\r\n" + 
+				"      \"hideInBreadcrumb\": true,\r\n" + 
+				"      \"children\": [\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Form Page\",\r\n" + 
+				"          \"i18n\": \"menu.form\",\r\n" + 
+				"          \"link\": \"/pro/form\",\r\n" + 
+				"          \"icon\": \"anticon-edit\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Basic Form\",\r\n" + 
+				"              \"link\": \"/pro/form/basic-form\",\r\n" + 
+				"              \"i18n\": \"menu.form.basicform\",\r\n" + 
+				"              \"shortcut\": true\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Step Form\",\r\n" + 
+				"              \"link\": \"/pro/form/step-form\",\r\n" + 
+				"              \"i18n\": \"menu.form.stepform\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Advanced Form\",\r\n" + 
+				"              \"link\": \"/pro/form/advanced-form\",\r\n" + 
+				"              \"i18n\": \"menu.form.advancedform\"\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"List\",\r\n" + 
+				"          \"i18n\": \"menu.list\",\r\n" + 
+				"          \"icon\": \"anticon-appstore\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Table List\",\r\n" + 
+				"              \"link\": \"/pro/list/table-list\",\r\n" + 
+				"              \"i18n\": \"menu.list.searchtable\",\r\n" + 
+				"              \"shortcut\": true\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Basic List\",\r\n" + 
+				"              \"link\": \"/pro/list/basic-list\",\r\n" + 
+				"              \"i18n\": \"menu.list.basiclist\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Card List\",\r\n" + 
+				"              \"link\": \"/pro/list/card-list\",\r\n" + 
+				"              \"i18n\": \"menu.list.cardlist\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Search List\",\r\n" + 
+				"              \"i18n\": \"menu.list.searchlist\",\r\n" + 
+				"              \"children\": [\r\n" + 
+				"                {\r\n" + 
+				"                  \"link\": \"/pro/list/articles\",\r\n" + 
+				"                  \"i18n\": \"menu.list.searchlist.articles\"\r\n" + 
+				"                },\r\n" + 
+				"                {\r\n" + 
+				"                  \"link\": \"/pro/list/projects\",\r\n" + 
+				"                  \"i18n\": \"menu.list.searchlist.projects\",\r\n" + 
+				"                  \"shortcut\": true\r\n" + 
+				"                },\r\n" + 
+				"                {\r\n" + 
+				"                  \"link\": \"/pro/list/applications\",\r\n" + 
+				"                  \"i18n\": \"menu.list.searchlist.applications\"\r\n" + 
+				"                }\r\n" + 
+				"              ]\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Profile\",\r\n" + 
+				"          \"i18n\": \"menu.profile\",\r\n" + 
+				"          \"icon\": \"anticon-profile\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Basic\",\r\n" + 
+				"              \"link\": \"/pro/profile/basic\",\r\n" + 
+				"              \"i18n\": \"menu.profile.basic\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Advanced\",\r\n" + 
+				"              \"link\": \"/pro/profile/advanced\",\r\n" + 
+				"              \"i18n\": \"menu.profile.advanced\",\r\n" + 
+				"              \"shortcut\": true\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Result\",\r\n" + 
+				"          \"i18n\": \"menu.result\",\r\n" + 
+				"          \"icon\": \"anticon-check-circle\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Success\",\r\n" + 
+				"              \"link\": \"/pro/result/success\",\r\n" + 
+				"              \"i18n\": \"menu.result.success\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Fail\",\r\n" + 
+				"              \"link\": \"/pro/result/fail\",\r\n" + 
+				"              \"i18n\": \"menu.result.fail\"\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Exception\",\r\n" + 
+				"          \"i18n\": \"menu.exception\",\r\n" + 
+				"          \"link\": \"/\",\r\n" + 
+				"          \"icon\": \"anticon-exception\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"403\",\r\n" + 
+				"              \"link\": \"/exception/403\",\r\n" + 
+				"              \"i18n\": \"menu.exception.not-permission\",\r\n" + 
+				"              \"reuse\": false\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"404\",\r\n" + 
+				"              \"link\": \"/exception/404\",\r\n" + 
+				"              \"i18n\": \"menu.exception.not-find\",\r\n" + 
+				"              \"reuse\": false\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"500\",\r\n" + 
+				"              \"link\": \"/exception/500\",\r\n" + 
+				"              \"i18n\": \"menu.exception.server-error\",\r\n" + 
+				"              \"reuse\": false\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Account\",\r\n" + 
+				"          \"i18n\": \"menu.account\",\r\n" + 
+				"          \"icon\": \"anticon-user\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"center\",\r\n" + 
+				"              \"link\": \"/pro/account/center\",\r\n" + 
+				"              \"i18n\": \"menu.account.center\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"settings\",\r\n" + 
+				"              \"link\": \"/pro/account/settings\",\r\n" + 
+				"              \"i18n\": \"menu.account.settings\"\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        }\r\n" + 
+				"      ]\r\n" + 
+				"    },\r\n" + 
+				"    {\r\n" + 
+				"      \"text\": \"More\",\r\n" + 
+				"      \"i18n\": \"menu.more\",\r\n" + 
+				"      \"group\": true,\r\n" + 
+				"      \"hideInBreadcrumb\": true,\r\n" + 
+				"      \"children\": [\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Report\",\r\n" + 
+				"          \"i18n\": \"menu.report\",\r\n" + 
+				"          \"icon\": \"anticon-cloud\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Relation\",\r\n" + 
+				"              \"link\": \"/data-v/relation\",\r\n" + 
+				"              \"i18n\": \"menu.report.relation\",\r\n" + 
+				"              \"reuse\": false\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        },\r\n" + 
+				"        {\r\n" + 
+				"          \"text\": \"Extras\",\r\n" + 
+				"          \"i18n\": \"menu.extras\",\r\n" + 
+				"          \"link\": \"/extras\",\r\n" + 
+				"          \"icon\": \"anticon-link\",\r\n" + 
+				"          \"children\": [\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Help Center\",\r\n" + 
+				"              \"link\": \"/extras/helpcenter\",\r\n" + 
+				"              \"i18n\": \"menu.extras.helpcenter\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Settings\",\r\n" + 
+				"              \"link\": \"/extras/settings\",\r\n" + 
+				"              \"i18n\": \"menu.extras.settings\"\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"              \"text\": \"Poi\",\r\n" + 
+				"              \"link\": \"/extras/poi\",\r\n" + 
+				"              \"i18n\": \"menu.extras.poi\"\r\n" + 
+				"            }\r\n" + 
+				"          ]\r\n" + 
+				"        }\r\n" + 
+				"      ]\r\n" + 
+				"    }\r\n" + 
+				"  ]\r\n" + 
+				"}\r\n" + 
+				"";
+		ResponseDTO<String> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(menuJsonString);
+        return response;
+	}
+	
 
 	@RequestMapping("/user")
-	public Map<String, Object> user(String no, Integer pi, Integer ps) {
+	public ResponseDTO<Map<String, Object>> user(String no, Integer pi, Integer ps) {
 		List<Map<String, Object>> userList = new ArrayList<>();
 		String[] avatarArray = new String[] { "https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png",
 				"https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png" };
@@ -67,11 +444,16 @@ public class LoginController {
 		returnMap.put("total", userList.size());
 		returnMap.put("list", userList.subList(start, pi * ps));
 
-		return returnMap;
+		ResponseDTO<Map<String, Object>> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(returnMap);
+        return response;
+		
+		
 	}
 
 	@RequestMapping("/user/{id}")
-	public Map<String, Object> user(@PathVariable Integer id) {
+	public ResponseDTO<Map<String, Object>> user(@PathVariable Integer id) {
 		List<Map<String, Object>> userList = new ArrayList<>();
 		String[] avatarArray = new String[] { "https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png",
 				"https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png" };
@@ -93,7 +475,12 @@ public class LoginController {
 			user.put("progress", Math.ceil(Math.random() * 100));
 			userList.add(user);
 		}
-		return userList.get(id - 1);
+		
+		ResponseDTO<Map<String, Object>> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(userList.get(id - 1));
+        return response;		
+		
 	}
 
 	/*
@@ -114,7 +501,7 @@ public class LoginController {
 	}
 
 	@RequestMapping("/chart")
-	public Map<String, Object> chart() {
+	public ResponseDTO<Map<String, Object>> chart() {
 		long beginDay = new Date().getTime();
 		List<Map<String, Object>> visitData = new ArrayList<Map<String, Object>>();
 		int[] fakeY = new int[] { 7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5 };
@@ -254,11 +641,16 @@ public class LoginController {
 		retMap.put("salesTypeDataOnline", salesTypeDataOnline);
 		retMap.put("salesTypeDataOffline", salesTypeDataOffline);
 		retMap.put("radarData", radarData);
-		return retMap;
+		
+		ResponseDTO<Map<String, Object>> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(retMap);
+        return response;		
+		
 	}
 
 	@RequestMapping("/chart/visit")
-	public Map<String, Object> chartVisit() {
+	public ResponseDTO<Map<String, Object>> chartVisit() {
 		long beginDay = new Date().getTime();
 		List<Map<String, Object>> visitData = new ArrayList<Map<String, Object>>();
 		int[] fakeY = new int[] { 7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5 };
@@ -270,7 +662,11 @@ public class LoginController {
 		}
 		Map<String, Object> retMap = new HashMap<>();
 		retMap.put("visitData", visitData);
-		return retMap;
+		
+		ResponseDTO<Map<String, Object>> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(retMap);
+        return response;		
 	}
 
 	@RequestMapping("/api/notice")
@@ -289,7 +685,7 @@ public class LoginController {
 	}
 
 	@RequestMapping("/api/statistical")
-	public Map<String, Object> getStatistical() {
+	public ResponseDTO<Map<String, Object>> getStatistical() {
 		Map<String, Integer> map = new HashMap<>();
 		map.put("WebsiteTraffics", 1);
 		map.put("WebsiteImpressions", 2);
@@ -297,11 +693,15 @@ public class LoginController {
 		map.put("SupportTickets", 4);
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("statisticalData", map);
-		return returnMap;
+		
+		ResponseDTO<Map<String, Object>> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(returnMap);
+        return response;
 	}
 
 	@RequestMapping("/api/todolist")
-	public Map<String, Object> getTodoList() {
+	public ResponseDTO<Map<String, Object>> getTodoList() {
 
 		List<Object> todoList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
@@ -348,11 +748,15 @@ public class LoginController {
 
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("todoList", todoList);
-		return returnMap;
+		
+		ResponseDTO<Map<String, Object>> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(returnMap);
+        return response;
 	}
 
 	@RequestMapping("/pois")
-	public Map<String, Object> getPois() {
+	public ResponseDTO<Map<String, Object>> getPois() {
 
 		List<Object> todoList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
@@ -412,6 +816,10 @@ public class LoginController {
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("list", todoList);
 		returnMap.put("total", todoList.size());
-		return returnMap;
+
+		ResponseDTO<Map<String, Object>> response = new ResponseDTO<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setData(returnMap);
+        return response;
 	}
 }

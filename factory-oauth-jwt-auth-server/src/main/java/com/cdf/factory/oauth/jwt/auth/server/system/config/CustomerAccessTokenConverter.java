@@ -34,16 +34,15 @@ public class CustomerAccessTokenConverter extends DefaultAccessTokenConverter {
 		public Map<String, ?> convertUserAuthentication(Authentication authentication) {
 			LinkedHashMap<String, Object> response = new LinkedHashMap<>();
 			SysUser sysUser = (SysUser) authentication.getPrincipal();
-			String realName = sysUser.getRealName();
-			response.put("user_name", authentication.getName());
-			response.put("name", ((SysUser) authentication.getPrincipal()).getRealName());
-			response.put("id", ((SysUser) authentication.getPrincipal()).getId());
+			//String realName = sysUser.getRealName();
+			response.put(USERNAME, authentication.getName());
+			//response.put("name", ((SysUser) authentication.getPrincipal()).getRealName());
+			//response.put("userId", ((SysUser) authentication.getPrincipal()).getId());
 			response.put("createAt", ((SysUser) authentication.getPrincipal()).getCreateTime());
 			if (authentication.getAuthorities() != null && !authentication.getAuthorities().isEmpty()) {
-				response.put("authorities", AuthorityUtils.authorityListToSet(authentication.getAuthorities()));
+				response.put(AUTHORITIES, AuthorityUtils.authorityListToSet(authentication.getAuthorities()));
 			}
 			return response;
 		}
 	}
-
 }

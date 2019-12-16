@@ -19,6 +19,10 @@
 	<!-- <properties> <spring-boot-admin.version>2.1.8</spring-boot-admin.version> 
 		</properties> -->
 	<dependencies>
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+		</dependency> -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>

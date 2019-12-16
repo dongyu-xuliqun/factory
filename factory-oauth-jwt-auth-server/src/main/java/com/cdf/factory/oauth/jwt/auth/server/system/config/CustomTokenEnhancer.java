@@ -13,7 +13,7 @@ import com.cdf.factory.oauth.jwt.auth.server.entity.SysUser;
 
 /**
  *
- * token生成携带的信息
+ * token生成携带的信息,向jwt中添加额外字段
  *
  */
 public class CustomTokenEnhancer implements TokenEnhancer {
@@ -25,7 +25,8 @@ public class CustomTokenEnhancer implements TokenEnhancer {
 		additionalInfo.put("name", user.getRealName());
 		additionalInfo.put("username", user.getUsername());
 		additionalInfo.put("authorities", user.getAuthorities());
-		additionalInfo.put("id", user.getId());
+		additionalInfo.put("userId", user.getId());
+		additionalInfo.put("avatar", user.getPhoto());
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
 		return accessToken;
 	}

@@ -2,10 +2,11 @@
 spring:  
   cloud:      
     consul:
-      host: 127.0.0.1
+      host: 10.0.50.127
+      #host: 127.0.0.1
       port: 8500
       discovery:
-        #prefer-ip-address: true
+        prefer-ip-address: true #该配置不打开，会导致consulhealth检查失败
                         #字符串不能为空,首字符必须为字母,尾字符必须为字母或数字,所有非字母数字的字符统一转换成'-'连接符,同时多个连续连接符转换成一个'-'. 
         #instance-id: ${spring.application.name}:@project.version@:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${random.int} #实例ID
         instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
@@ -13,8 +14,13 @@ spring:
         #health-check-interval: 10s
     config:
       server:
+#        health:#          repositories:#            config-service:
+#              name: config-service
+#              profiles: ${spring.profiles.active}
+#              label: ""
         native:
-          search-locations: classpath:/config, classpath:/config/dev, classpath:/config/prod
+          search-locations: classpath:/config/dev, classpath:/config/prod
+        #bootstrap: true #是否从其自己的配置中心获取配置
 #    bus:   #TODO
 #      trace:
 #        enabled: true
@@ -26,7 +32,13 @@ spring:
 #      password: booszy 
   profiles:
     active: native #native/remote   #native表示本地方式 #这个不要随意改  
-
+ 
+  rabbitmq:
+      host: localhost # RabbitMQ的主机地址
+      port: 5672 #  RabbitMQ的端口号
+      username: guest #登录到RabbitMQ的用户名
+      password: guest # 登录到RabbitMQ的密码
+      virtual-host: / #连接到RabbitMQ的虚拟主机
 # 允许/actuator/bus-refresh接口被外部调用
 management:
   endpoints:

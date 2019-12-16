@@ -25,7 +25,7 @@ spring:
       fail-fast: true #不作任何额外配置的情况下，失败响应有点迟钝，举个简单的例子，关掉config-server，我们直接启动config-client，此时启动会报错，但是报错时间较晚，报错的时候系统已经打印了许多启动日志了，如果我们希望在启动失败时能够快速响应
 #       username: root
 #       password: booszy
-      name: mail,admin,actuator #db-mysql,rabbitmq
+      name: mail,admin,actuator,config-rabbitmq #db-mysql,
       profile: ${spring.profiles.active}
     consul:
       host: 127.0.0.1 #consul节点IP

@@ -1,17 +1,17 @@
-#spring:
-#   application:
-#    name: eureka-service
-#server:
-#   port: 8761
-#  
-#eureka:
-#   instance:
-#    hostname: server1
-#    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
-#    appname: ${spring.application.name}
-#   client:    
-#    service-url:
-#      default-zone: http://server2:8762/eureka/,http://server3:8763/eureka/
+spring:
+   application:
+    name: eureka-service
+server:
+   port: 8761
+  
+eureka:
+   instance:
+    hostname: server1
+    #instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
+    appname: ${spring.application.name}
+   client:    
+    service-url:
+      default-zone: http://server2:8762/eureka/,http://server3:8763/eureka/
     
 #spring:
 #   application:
@@ -22,23 +22,23 @@
 #eureka:
 #   instance:
 #    hostname: server2
-#    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
+#    #instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
 #    appname: ${spring.application.name}
 #   client:    
 #    service-url:
 #      default-zone: http://server1:8761/eureka/,http://server3:8763/eureka/
       
-spring:
-  application:
-    name: eureka-service
-server:
-  port: 8763
-  
-eureka:
-  instance:
-    hostname: server3
-    instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
-    appname: ${spring.application.name}
-  client:
-    service-url:
-      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/
+#spring:
+#  application:
+#    name: eureka-service
+#server:
+#  port: 8763
+#  
+#eureka:
+#  instance:
+#    hostname: server3
+#    #instance-id: ${spring.cloud.client.ip-address}:${spring.cloud.client.hostname}:${spring.application.name}:${server.port}:@project.version@
+#    appname: ${spring.application.name}
+#  client:
+#    service-url:
+#      default-zone: http://server1:8761/eureka/,http://server2:8762/eureka/

@@ -39,10 +39,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 		    <!-- spring cloud sleuth主要功能就是在分布式系统中提供追踪解决方案 -->
 			<groupId>org.springframework.cloud</groupId>
@@ -96,10 +96,35 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <scope>runtime</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
 		<!-- <dependency>
 		    <groupId>net.sourceforge.tess4j</groupId>
 		    <artifactId>tess4j</artifactId>
 		    <version>3.2.1</version>
 		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.influxdb/influxdb-java -->
+		<dependency>
+		    <groupId>org.influxdb</groupId>
+		    <artifactId>influxdb-java</artifactId>
+		   <!--  <version>2.15</version> -->
+		</dependency>		
+		<dependency>
+		   <groupId>org.springframework.integration</groupId>
+		   <artifactId>spring-integration-mqtt</artifactId>
+		</dependency>
+		<dependency>
+		<groupId>com.zjiecode</groupId>
+		  <artifactId>wxpusher-client</artifactId>
+		  <version>2.0.0</version>
+		  <type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>	
 </project>

@@ -16,7 +16,7 @@ spring:
       fail-fast: true
 #       username: root
 #       password: booszy
-      name: db-mysql,db-mongodb,redis,config-rabbitmq,zipkin,actuator
+      name: db-mysql,db-mongodb,redis,zipkin,actuator #config-rabbitmq,
       profile: ${spring.profiles.active} 
     consul:
       host: 127.0.0.1  #consul节点IP
@@ -30,7 +30,8 @@ spring:
         #health-check-path: /actuator/health #健康检查,默认配置，可以注释掉
         #health-check-interval: 10s #默认配置10s，可以注释掉
         #tags: management.context-path=/foo, health.path=/ping #, user.name=user, user.password=password
-       
+    bus:
+      refresh:        enabled: true   
 #  security:
 #    user:
 #      name: 'admin'

@@ -1,0 +1,21 @@
+server:
+  port: 8100
+spring:
+  ldap:
+    embedded:
+      ldif: ldap-server.ldif
+      base-dn: 
+      - dc=didispace
+      - dc=com
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test_f?&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+      database: MYSQL
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+    
